@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Header } from "./components/header/header";
+import { createGlobalStyle } from "styled-components";
+import colors from "./colors";
+import { Products } from "./components/products/main/products";
+import { Footer } from "./components/footer/footer";
+import { Cart } from "./components/products/cart/cart";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section style={{ position: "relative" }}>
+      <GlobalStyle />
+      <Cart />
+      <Header />
+      <Products />
+      <Footer />
+    </section>
   );
 }
 
+const GlobalStyle = createGlobalStyle`
+  *{
+    margin:0;
+    box-sizing:0;
+    padding:0;
+    font-family: 'Montserrat', sans-serif;
+    a{
+      text-decoration: none;
+    }
+    li{
+      list-style: none;
+    }
+    body{
+      background-color:${colors.primary}
+    }
+  }
+ 
+`;
 export default App;
