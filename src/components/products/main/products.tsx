@@ -54,7 +54,7 @@ export const Products = () => {
 
 const ProductsStyle = styled.section`
   display: flex;
-  padding: 90px;
+  padding: 100px;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;

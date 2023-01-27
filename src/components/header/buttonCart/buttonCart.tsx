@@ -1,7 +1,8 @@
 import { BsFillCartFill } from "react-icons/bs";
 import styled from "styled-components";
+import {FunctionComponent} from 'react'
 
-export const ButtonCart = () => {
+export const ButtonCart: FunctionComponent = () => {
   return (
     <ButtonCartStyle>
       <BsFillCartFill />

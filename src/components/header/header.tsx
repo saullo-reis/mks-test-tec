@@ -1,15 +1,18 @@
-import { ButtonCart } from "./buttonCart/buttonCart";
 import styled from "styled-components";
 import colors from "../../colors";
+import { ModalCart } from "./modal/modal";
+
 
 export const Header = () => {
+
+
   return (
     <HeaderStyle>
       <Logo>
         <h1>MKS</h1>
         <span>Sistemas</span>
       </Logo>
-      <ButtonCart />
+      <ModalCart/>
     </HeaderStyle>
   );
 };
@@ -22,7 +25,7 @@ const HeaderStyle = styled.section`
   padding: 15px 40px;
 `;
 
-const Logo = styled.section`
+const Logo = styled.div`
   color: #ffffff;
   height: 49px;
   display: flex;
@@ -32,7 +35,7 @@ const Logo = styled.section`
   }
   span {
     font-size: 20px;
-    margin-left:10px;
+    margin-left: 10px;
     font-weight: 300;
     display: flex;
     align-items: flex-end;

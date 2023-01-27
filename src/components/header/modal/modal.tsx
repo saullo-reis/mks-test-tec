@@ -1,30 +1,55 @@
+import { ButtonCart } from "../buttonCart/buttonCart";
+import { useState } from "react";
 import styled from "styled-components";
 import colors from "../../../colors";
+import './animation/animation.sass'
+import { ProductsInCart } from "./productsInCart/productsInCart";
 
-export const Cart = () => {
+export const ModalCart = () => {
+  const [show, setShow] = useState<boolean>(false);
+
+  function handleClick(): void {
+    if (!show) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }
+
   return (
-    <CartStyle>
-      <TitleAndItens>
-        <div>
-          <h2>Carrinho de Compras</h2>
-          <ul>
-            <li>Teste </li>
-            <li>Teste </li>
-            <li>Teste </li>
-          </ul>
-        </div>
-        <span>X</span>
-      </TitleAndItens>
-      <PriceAndButton>
-        <div>
-          <h2>Total:</h2>
-          <h2>2</h2>
-        </div>
-        <button>Finalizar Compra</button>
-      </PriceAndButton>
-    </CartStyle>
+    <>
+      <Button
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        <ButtonCart />
+      </Button>
+      {show && (
+        <CartStyle className="modal">
+          <TitleAndItens>
+            <div>
+              <h2>Carrinho de Compras</h2>
+              <ProductsInCart/>
+            </div>
+            <span onClick={() => {handleClick()}}>X</span>
+          </TitleAndItens>
+          <PriceAndButton>
+            <div>
+              <h2>Total:</h2>
+              <h2>2</h2>
+            </div>
+            <button>Finalizar Compra</button>
+          </PriceAndButton>
+        </CartStyle>
+      )}
+    </>
   );
 };
+
+const Button = styled.section`
+    border-radius: 8px;
+`
 
 const CartStyle = styled.section`
   box-shadow: -5px 0px 6px rgba(0, 0, 0, 0.13);
@@ -33,7 +58,8 @@ const CartStyle = styled.section`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 100%;
+  top: 0;
+  height:100%;
   width: 40%;
   background-color: ${colors.secundary};
   
