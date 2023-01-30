@@ -1,13 +1,32 @@
 import { ButtonCart } from "../buttonCart/buttonCart";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import colors from "../../../colors";
 import './animation/animation.sass'
 import { ProductsInCart } from "./productsInCart/productsInCart";
+import { useSelector } from "react-redux";
+import { useProducts } from "../../store/sliceProducts";
+
 
 export const ModalCart = () => {
   const [show, setShow] = useState<boolean>(false);
+  const products = useSelector(useProducts);
+  const [totalPrice, setTotalPrice] = useState<number>(0)
 
+
+  useEffect(() => {
+    setTotalPrice(0)
+  },[products])
+  useEffect(() => {
+    products.map((element) => {
+      const price = element.price
+      const priceInt = parseInt(price)
+      console.log(priceInt)
+      setTotalPrice(totalPrice + priceInt )
+    })
+  },[products])
+
+  console.log(totalPrice)
   function handleClick(): void {
     if (!show) {
       setShow(true);
@@ -15,7 +34,7 @@ export const ModalCart = () => {
       setShow(false);
     }
   }
-
+  console.log(products)
   return (
     <>
       <Button
@@ -37,7 +56,7 @@ export const ModalCart = () => {
           <PriceAndButton>
             <div>
               <h2>Total:</h2>
-              <h2>2</h2>
+              <h2>R${totalPrice}</h2>
             </div>
             <button>Finalizar Compra</button>
           </PriceAndButton>
@@ -76,7 +95,7 @@ const TitleAndItens = styled.div`
     text-align: center;
     padding: 3px;
     cursor: pointer;
-    position: absolute;
+    position:absolute;
     font-weight:400;
     right: 0;
     margin-right: 20px;

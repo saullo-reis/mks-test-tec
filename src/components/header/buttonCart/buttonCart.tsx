@@ -1,12 +1,16 @@
 import { BsFillCartFill } from "react-icons/bs";
 import styled from "styled-components";
 import {FunctionComponent} from 'react'
+import { useSelector } from "react-redux";
+import { useProducts } from "../../store/sliceProducts";
 
 export const ButtonCart: FunctionComponent = () => {
+  const products = useSelector(useProducts);
+
   return (
     <ButtonCartStyle>
       <BsFillCartFill />
-      <span>0</span>
+      <span>{products.length}</span>
     </ButtonCartStyle>
   );
 };

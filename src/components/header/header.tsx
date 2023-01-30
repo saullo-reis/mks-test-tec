@@ -4,7 +4,7 @@ import { ModalCart } from "./modal/modal";
 
 
 export const Header = () => {
-
+  
 
   return (
     <HeaderStyle>

@@ -3,6 +3,8 @@ import { getProducts } from "../../get/get";
 import styled from 'styled-components'
 import {RiShoppingBag3Line} from "react-icons/ri"
 import colors from "../../../colors";
+import { useDispatch } from "react-redux"
+import { addProducts } from "../../store/sliceProducts";
 
 interface Product {
   id: number;
@@ -25,7 +27,8 @@ export const Products = () => {
     };
     fetchData();
   }, []);
-  console.log(products);
+  const dispatch = useDispatch();
+
   return (
     <ProductsStyle>
       <ul>{products !== undefined && products.map((element:any, index: number) => {
@@ -39,7 +42,12 @@ export const Products = () => {
               <span>R${element.price}</span>
             </NameAndPrice>
             <p>Redesigned from scratch and completely revised.</p>
-            <button>
+              <button onClick={() => dispatch(addProducts({
+                name: element.name,
+                price: element.price,
+                quantity: 1,
+                photo: element.photo
+              }))}>
               <span>
                 <RiShoppingBag3Line />
               </span>
