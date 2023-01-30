@@ -1,23 +1,14 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useProducts } from "../../../store/sliceProducts";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeProducts } from "../../../store/sliceProducts";
+import { incrementQuantity, decrementQuantity } from "../../../store/sliceProducts";
 
 export const ProductsInCart = () => {
   const products = useSelector(useProducts);
-  const [quantityProducts, setQuantity] = useState(1);
   const dispatch = useDispatch();
-
-  console.log(products);
-  const handleClick = (action: string, element: object) => {
-    if (action === "add") {
-      console.log(element);
-    } else if (action === "remove" && quantityProducts >= 1) {
-      setQuantity(quantityProducts - 1);
-    }
-  };
+  console.log(products)
 
   return (
     <List>
@@ -29,31 +20,17 @@ export const ProductsInCart = () => {
             <BoxButton>
               <p>Qtd</p>
               <Button>
-                <button
-                  onClick={() => {
-                    handleClick("remove", element);
-                  }}
-                >
+                <button onClick={() => dispatch(decrementQuantity(index))}>
                   -
                 </button>
                 <p>{element.quantity}</p>
-                <button
-                  onClick={() => {
-                    handleClick("add", element);
-                  }}
-                >
+                <button onClick={() => dispatch(incrementQuantity(index))}>
                   +
                 </button>
               </Button>
             </BoxButton>
             <h2>R${element.price}</h2>
-            <RemoveButton
-              onClick={() =>
-                dispatch(
-                  removeProducts(index)
-                )
-              }
-            >
+            <RemoveButton onClick={() => dispatch(removeProducts(index))}>
               X
             </RemoveButton>
           </li>
@@ -103,7 +80,6 @@ const RemoveButton = styled.button`
   width: 20px;
   height: 20px;
   text-align: center;
-  padding: 3px;
   cursor: pointer;
   position: absolute;
   font-weight: 400;

@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { ScriptTarget } from 'typescript';
 
 interface Products {
   id: number;
@@ -21,12 +20,17 @@ const sliceProducts = createSlice({
       return [...state, action.payload];
     },
     removeProducts: (state, action) => void state.splice(action.payload, 1),
-    incrementQuantity: (state, action) => void state[action.payload].quantity,
+    incrementQuantity: (state, action) => void (state[action.payload].quantity += 1),
+    decrementQuantity(state, action) {
+      if(state[action.payload].quantity !== 1){
+        return void (state[action.payload].quantity -= 1)
+      }
+    }
   },
 });
 
 export default sliceProducts.reducer;
-export const {addProducts, removeProducts} = sliceProducts.actions;
+export const {addProducts, removeProducts, incrementQuantity, decrementQuantity} = sliceProducts.actions;
 
 export const useProducts = ( state: any) => {
     return state.products as Products[]

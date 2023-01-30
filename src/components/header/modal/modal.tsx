@@ -13,20 +13,16 @@ export const ModalCart = () => {
   const products = useSelector(useProducts);
   const [totalPrice, setTotalPrice] = useState<number>(0)
 
-
   useEffect(() => {
-    setTotalPrice(0)
-  },[products])
-  useEffect(() => {
+    setTotalPrice(0);
     products.map((element) => {
-      const price = element.price
-      const priceInt = parseInt(price)
-      console.log(priceInt)
-      setTotalPrice(totalPrice + priceInt )
-    })
-  },[products])
+      const price = element.price ;
+      const priceInt = parseInt(price) * element.quantity;
+      console.log(products);
+      setTotalPrice(totalPrice + priceInt );
+    });
+  }, [products]);
 
-  console.log(totalPrice)
   function handleClick(): void {
     if (!show) {
       setShow(true);
@@ -34,7 +30,6 @@ export const ModalCart = () => {
       setShow(false);
     }
   }
-  console.log(products)
   return (
     <>
       <Button
