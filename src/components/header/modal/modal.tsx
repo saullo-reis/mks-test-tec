@@ -28,11 +28,7 @@ export const ModalCart = () => {
   }, [products]);
 
   function handleClick(): void {
-    if (!show) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
+    !show ? setShow(true) : setShow(false);
   }
   return (
     <>
@@ -84,7 +80,7 @@ const CartStyle = styled.section`
   flex-direction: column;
   top: 0;
   height: 100%;
-  width: 40%;
+  width: 35%;
   background-color: ${colors.secundary};
 `;
 

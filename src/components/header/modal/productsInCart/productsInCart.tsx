@@ -46,8 +46,6 @@ export const ProductsInCart = () => {
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   li {
     position: relative;
     box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.05);
@@ -57,7 +55,7 @@ const List = styled.ul`
     align-items: center;
     color: #000;
     background-color: #ffffff;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100%;
     height: 95px;
     img {
@@ -72,7 +70,8 @@ const List = styled.ul`
     }
     h2 {
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
+      text-align: right;
       color: #000;
       width: 30%;
     }
@@ -97,6 +96,7 @@ const RemoveButton = styled.button`
 const BoxButton = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
   p {
     font-size: 10px;
   }
