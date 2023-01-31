@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../../get/get";
-import styled from 'styled-components'
-import {RiShoppingBag3Line} from "react-icons/ri"
+import styled from "styled-components";
+import { RiShoppingBag3Line } from "react-icons/ri";
 import colors from "../../../colors";
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
 import { addProducts } from "../../store/sliceProducts";
+import Skeleton from "../skeleton/skeleton";
 
 interface Product {
   id: number;
@@ -20,6 +21,13 @@ interface Product {
 
 export const Products = () => {
   const [products, setProducts] = useState<Product>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       const response = await getProducts();
@@ -31,31 +39,48 @@ export const Products = () => {
 
   return (
     <ProductsStyle>
-      <ul>{products !== undefined && products.map((element:any, index: number) => {
-        return (
-          <li key={index}>
-            <ProductImage
-              style={{ backgroundImage: `url(${element.photo})` }}
-            ></ProductImage>
-            <NameAndPrice>
-              <h2>{element.name}</h2>
-              <span>R${element.price}</span>
-            </NameAndPrice>
-            <p>Redesigned from scratch and completely revised.</p>
-              <button onClick={() => dispatch(addProducts({
-                name: element.name,
-                price: element.price,
-                quantity: 1,
-                photo: element.photo
-              }))}>
-              <span>
-                <RiShoppingBag3Line />
-              </span>
-              <h3>Comprar</h3>
-            </button>
-          </li>
-        );
-      })}</ul>
+      <ul>
+        {isLoading ? (
+          [1, 2, 3, 4, 5, 6, 7, 8].map((element) => {
+            return <Skeleton key={element} width={217} height={285} borderRadius={8} />;
+          })
+        ) : (
+          <ul>
+            {products !== undefined &&
+              products.map((element: any, index: number) => {
+                return (
+                  <li key={index}>
+                    <ProductImage
+                      style={{ backgroundImage: `url(${element.photo})` }}
+                    ></ProductImage>
+                    <NameAndPrice>
+                      <h2>{element.name}</h2>
+                      <span>R${element.price}</span>
+                    </NameAndPrice>
+                    <p>Redesigned from scratch and completely revised.</p>
+                    <button
+                      onClick={() =>
+                        dispatch(
+                          addProducts({
+                            name: element.name,
+                            price: element.price,
+                            quantity: 1,
+                            photo: element.photo,
+                          })
+                        )
+                      }
+                    >
+                      <span>
+                        <RiShoppingBag3Line />
+                      </span>
+                      <h3>Comprar</h3>
+                    </button>
+                  </li>
+                );
+              })}
+          </ul>
+        )}
+      </ul>
     </ProductsStyle>
   );
 };
@@ -73,8 +98,8 @@ const ProductsStyle = styled.section`
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    max-width: 1200px;
     align-items: center;
+    max-width: 1090px;
   }
   li {
     background-color: #ffffff;
@@ -118,18 +143,18 @@ const ProductsStyle = styled.section`
 
 const ProductImage = styled.div`
   width: 140px;
-  height:60%;
+  height: 60%;
   background-size: 100%;
   background-repeat: no-repeat;
-`
+`;
 
 const NameAndPrice = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width:90%;
+  width: 90%;
   h2 {
-    width:100px;
+    width: 100px;
     font-size: 16px;
     font-weight: 400;
     color: ${colors.tertiary};

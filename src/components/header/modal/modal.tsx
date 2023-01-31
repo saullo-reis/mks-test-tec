@@ -2,25 +2,29 @@ import { ButtonCart } from "../buttonCart/buttonCart";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import colors from "../../../colors";
-import './animation/animation.sass'
+import "./animation/animation.sass";
 import { ProductsInCart } from "./productsInCart/productsInCart";
 import { useSelector } from "react-redux";
 import { useProducts } from "../../store/sliceProducts";
 
-
 export const ModalCart = () => {
   const [show, setShow] = useState<boolean>(false);
   const products = useSelector(useProducts);
-  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
     setTotalPrice(0);
-    products.map((element) => {
-      const price = element.price ;
+    const arrayPrices = products.map((element) => {
+      const price = element.price;
       const priceInt = parseInt(price) * element.quantity;
-      console.log(products);
-      setTotalPrice(totalPrice + priceInt );
+      return priceInt;
     });
+    const initialValue = 0;
+    const soma = arrayPrices.reduce(
+      (accumulator: number, currentValue: number) => accumulator + currentValue,
+      initialValue
+    );
+    setTotalPrice(soma);
   }, [products]);
 
   function handleClick(): void {
@@ -40,13 +44,19 @@ export const ModalCart = () => {
         <ButtonCart />
       </Button>
       {show && (
-        <CartStyle className="modal">
+        <CartStyle className="animation">
           <TitleAndItens>
             <div>
               <h2>Carrinho de Compras</h2>
-              <ProductsInCart/>
+              <ProductsInCart />
             </div>
-            <span onClick={() => {handleClick()}}>X</span>
+            <span
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              X
+            </span>
           </TitleAndItens>
           <PriceAndButton>
             <div>
@@ -62,8 +72,8 @@ export const ModalCart = () => {
 };
 
 const Button = styled.section`
-    border-radius: 8px;
-`
+  border-radius: 8px;
+`;
 
 const CartStyle = styled.section`
   box-shadow: -5px 0px 6px rgba(0, 0, 0, 0.13);
@@ -73,10 +83,9 @@ const CartStyle = styled.section`
   justify-content: space-between;
   flex-direction: column;
   top: 0;
-  height:100%;
+  height: 100%;
   width: 40%;
   background-color: ${colors.secundary};
-  
 `;
 
 const TitleAndItens = styled.div`
@@ -90,8 +99,8 @@ const TitleAndItens = styled.div`
     text-align: center;
     padding: 3px;
     cursor: pointer;
-    position:absolute;
-    font-weight:400;
+    position: absolute;
+    font-weight: 400;
     right: 0;
     margin-right: 20px;
     color: #ffffff;
@@ -104,7 +113,7 @@ const TitleAndItens = styled.div`
     width: 180px;
     color: #ffffff;
   }
-  ul{
+  ul {
     margin-top: 30px;
   }
 `;
@@ -119,14 +128,14 @@ const PriceAndButton = styled.div`
     border: none;
     color: #ffffff;
     background-color: #000000;
-    cursor:pointer;
+    cursor: pointer;
   }
-  div{
-    display:flex;
-    justify-content:space-between;
-    h2{
-        color:#ffffff;
-        margin:20px;
+  div {
+    display: flex;
+    justify-content: space-between;
+    h2 {
+      color: #ffffff;
+      margin: 20px;
     }
   }
 `;

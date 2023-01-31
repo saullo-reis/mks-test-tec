@@ -5,14 +5,13 @@ import { Products } from "./components/products/main/products";
 import { Footer } from "./components/footer/footer";
 
 function App() {
-
   return (
-      <section style={{ position: "relative" }}>
-        <GlobalStyle />
-        <Header />
-        <Products />
-        <Footer />
-      </section>
+    <section style={{ position: "relative" }}>
+      <GlobalStyle />
+      <Header />
+      <Products />
+      <Footer />
+    </section>
   );
 }
 

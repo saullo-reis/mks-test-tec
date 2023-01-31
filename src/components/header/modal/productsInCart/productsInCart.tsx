@@ -3,18 +3,21 @@ import { useSelector } from "react-redux";
 import { useProducts } from "../../../store/sliceProducts";
 import { useDispatch } from "react-redux";
 import { removeProducts } from "../../../store/sliceProducts";
-import { incrementQuantity, decrementQuantity } from "../../../store/sliceProducts";
+import {
+  incrementQuantity,
+  decrementQuantity,
+} from "../../../store/sliceProducts";
+import "../animation/animation.sass";
 
 export const ProductsInCart = () => {
   const products = useSelector(useProducts);
   const dispatch = useDispatch();
-  console.log(products)
 
   return (
     <List>
       {products.map((element, index) => {
         return (
-          <li key={index}>
+          <li key={index} className="animation">
             <img src={element.photo} alt="product-name"></img>
             <h3>{element.name}</h3>
             <BoxButton>

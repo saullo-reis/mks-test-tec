@@ -2,17 +2,14 @@ import styled from "styled-components";
 import colors from "../../colors";
 import { ModalCart } from "./modal/modal";
 
-
 export const Header = () => {
-  
-
   return (
     <HeaderStyle>
       <Logo>
         <h1>MKS</h1>
         <span>Sistemas</span>
       </Logo>
-      <ModalCart/>
+      <ModalCart />
     </HeaderStyle>
   );
 };
