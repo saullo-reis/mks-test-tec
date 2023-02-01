@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import colors from "../../colors";
 import { ModalCart } from "./modal/modal";
-import {ReactNode} from "react"
 
 
 export const Header = ()  =>  {

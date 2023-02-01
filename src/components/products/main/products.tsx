@@ -22,12 +22,14 @@ interface Product {
 export const Products = () => {
   const [products, setProducts] = useState<Product>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
   }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getProducts();
@@ -35,8 +37,7 @@ export const Products = () => {
     };
     fetchData();
   }, []);
-  const dispatch = useDispatch();
-
+  
   return (
     <ProductsStyle>
       <ul>

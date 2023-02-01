@@ -1,6 +1,4 @@
-import styled from "styled-components";
 import "./skeleton.sass";
-
 interface Props {
   width: number | string;
   height: number | string;

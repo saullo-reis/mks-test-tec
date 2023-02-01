@@ -8,28 +8,20 @@ import { useSelector } from "react-redux";
 import { useProducts } from "../../store/sliceProducts";
 
 export const ModalCart = () => {
-  const [show, setShow] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const products = useSelector(useProducts);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
-    setTotalPrice(0);
-    const arrayPrices = products.map((element) => {
-      const price = element.price;
-      const priceInt = parseInt(price) * element.quantity;
-      return priceInt;
-    });
-    const initialValue = 0;
-    const soma = arrayPrices.reduce(
-      (accumulator: number, currentValue: number) => accumulator + currentValue,
-      initialValue
-    );
-    setTotalPrice(soma);
+    const sumOfPrices = products.reduce(function (accumulator, price): number {
+      const priceInt = parseInt(price.price) * price.quantity;
+      return accumulator + priceInt;
+    }, 0);
+    setTotalPrice(sumOfPrices);
   }, [products]);
 
-  function handleClick(): void {
-    !show ? setShow(true) : setShow(false);
-  }
+  function handleClick(): void {!showModal ? setShowModal(true) : setShowModal(false);}
+
   return (
     <>
       <Button
@@ -39,7 +31,7 @@ export const ModalCart = () => {
       >
         <ButtonCart />
       </Button>
-      {show && (
+      {showModal && (
         <CartStyle className="animation">
           <TitleAndItens>
             <div>
