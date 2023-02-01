@@ -74,6 +74,10 @@ const CartStyle = styled.section`
   height: 100%;
   width: 35%;
   background-color: ${colors.secundary};
+  @media (max-width: 1080px) {
+    width:70%;
+    
+  }
 `;
 
 const TitleAndItens = styled.div`
@@ -104,6 +108,12 @@ const TitleAndItens = styled.div`
   ul {
     margin-top: 30px;
   }
+  @media (max-width: 360px) {
+    h2 {
+      width: 120px;
+      text-align: center;
+    }
+  }
 `;
 
 const PriceAndButton = styled.div`
@@ -127,3 +137,4 @@ const PriceAndButton = styled.div`
     }
   }
 `;
+

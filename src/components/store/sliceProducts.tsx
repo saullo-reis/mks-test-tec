@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Products {
+interface ProductsInStore {
   id: number;
   name: string;
   photo: string;
@@ -8,7 +8,7 @@ interface Products {
   quantity: number;
 }
 
-const INITIAL_STATE: Products[] = [];
+const INITIAL_STATE: ProductsInStore[] = [];
 
 const sliceProducts = createSlice({
   name: "products",
@@ -37,5 +37,5 @@ export const {
 } = sliceProducts.actions;
 
 export const useProducts = (state: any) => {
-  return state.products as Products[];
+  return state.products as ProductsInStore[];
 };

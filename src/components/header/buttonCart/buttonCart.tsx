@@ -24,6 +24,10 @@ const ButtonCartStyle = styled.div`
     justify-content:center;
     border-radius: 8px;
     cursor: pointer;
+    @media(max-width: 360px){
+      width: 70px;
+      margin-left: 10px;
+    }
     span{
         font-weight: 700;
         margin-left: 15px;

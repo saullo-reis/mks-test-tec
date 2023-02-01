@@ -4,7 +4,7 @@ import store from "../store/store";
 import { Provider } from "react-redux";
 import "@testing-library/jest-dom"
 
-jest.mock('')
+
 
 describe("Header", () => {
     test("testando a renderização", () => {
@@ -18,15 +18,18 @@ describe("Header", () => {
         expect(screen.getByText("Sistemas")).toBeInTheDocument();
         expect(screen.getByText("0")).toBeInTheDocument();
     })
-    test("testando se ao clicar no botão abre", () => {
+    
+    test("testando se ao clicar no botão abre o modal", () => {
         render(
           <Provider store={store}>
-              <Header />
+              <Header/>
           </Provider>
         );
 
         const btnCart = screen.getByText("0")
 
-        fireEvent.click(btnCart);
+        fireEvent.click(btnCart);    
+
+        expect(screen.getByText("Carrinho de Compras")).toBeInTheDocument();
     })
 })

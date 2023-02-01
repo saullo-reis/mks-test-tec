@@ -1,7 +1,7 @@
 import { Header } from "./components/header/header";
 import { createGlobalStyle } from "styled-components";
 import colors from "./colors";
-import { Products } from "./components/products/main/products";
+import { Products } from "./components/products/main/productsList";
 import { Footer } from "./components/footer/footer";
 
 function App() {

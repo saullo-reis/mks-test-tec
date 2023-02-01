@@ -46,6 +46,7 @@ export const ProductsInCart = () => {
 const List = styled.ul`
   display: flex;
   flex-direction: column;
+
   li {
     position: relative;
     box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.05);
@@ -58,6 +59,20 @@ const List = styled.ul`
     justify-content: space-evenly;
     width: 100%;
     height: 95px;
+    @media (max-width: 530px) {
+      flex-direction: column;
+      height: 200px;
+      flex-flow: row wrap;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      h3 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+    }
     img {
       width: 60px;
       height: 57px;
