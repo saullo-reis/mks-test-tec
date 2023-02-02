@@ -13,6 +13,11 @@ export const ProductsInCart = () => {
   const products = useSelector(useProducts);
   const dispatch = useDispatch();
 
+  function stringForInt(element: any){
+    const priceInt = parseInt(element.price)
+    console.log(element);
+    return priceInt
+  }
   return (
     <List>
       {products.map((element, index) => {
@@ -32,7 +37,7 @@ export const ProductsInCart = () => {
                 </button>
               </Button>
             </BoxButton>
-            <h2>R${element.price}</h2>
+            <h2>R${stringForInt(element) * element.quantity}</h2>
             <RemoveButton onClick={() => dispatch(removeProducts(index))}>
               X
             </RemoveButton>
